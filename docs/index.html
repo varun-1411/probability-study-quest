@@ -680,7 +680,7 @@ async function connect() {
   try { db = await c.use('db'); } catch (e) { db = null; }
   if (!db) { setStatus('Saved in this browser only'); render(); return; }
   ref = db.doc('progress/state');
-  db.collection('drafts').get().then(q => { q.docs.forEach(s => { const x = s.data(); if (x) DRAFTS[s.id] = x.status || 'partial'; }); render(); }).catch(() => {});
+  try { db.collection('drafts').get().then(q => { q.docs.forEach(s => { const x = s.data(); if (x) DRAFTS[s.id] = x.status || 'partial'; }); render(); }).catch(() => {}); } catch (e) {}
   const timer = setTimeout(() => setStatus('Your saved progress cannot be reached yet'), 10000);
   unsub = ref.onSnapshot(snap => {
     clearTimeout(timer);
