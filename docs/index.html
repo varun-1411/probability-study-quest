@@ -280,7 +280,7 @@ function viewModules() {
       const s = S.mods[m.code], x = modXP(s);
       const chips = s ? [s.ps && 'Problem set', s.code && 'Code lab', s.teach && 'Teach-back', s.exit != null && s.exit !== '' && `Exit ${s.exit}%`].filter(Boolean).map(c => `<span class="chip ok">${esc(c)}</span>`).join(' ') : '';
       const meta = m.finish ? `Planned finish ${fmt(m.finish)}` : 'Optional module';
-      const req = ((S.requests || {})[m.code] ? ' <span class="chip">Requested</span>' : '') + (DRAFTS[m.code] ? ` <span class="chip">${DRAFTS[m.code] === 'complete' ? 'Draft' : 'Draft, unfinished'}</span>` : '');
+      const req = ((S.requests || {})[m.code] && !m.available ? ' <span class="chip">Requested</span>' : '') + (DRAFTS[m.code] ? ` <span class="chip">${DRAFTS[m.code] === 'complete' ? 'Draft' : 'Draft, unfinished'}</span>` : '');
       const inner = `<span class="c">${m.code}</span><span><b>${esc(m.name)}</b> ${m.core ? '<span class="chip y">Research core</span>' : ''}${req}<br><span class="small muted">${meta} · ${m.track}</span> ${chips}</span><span class="xp">${x ? x + ' XP' : (m.available ? 'Open' : 'Preview')}</span>`;
       return `<a class="mod ${m.available || DRAFTS[m.code] ? '' : 'na'}" href="${hashOf(m.code)}">${inner}</a>`;
     }).join('') + `</div>`;
