@@ -5,7 +5,7 @@ Source of truth: the live doc "Probability → Stochastic Processes → MDPs →
 ## Style (user asked 2026-11-16): plain language, intuition first, then rigor
 - Module loop: story (taxi stand) → picture → precise definitions/proofs → practice → teach-back.
 - Problem sets and solutions: plain-words explanation first, then the rigorous argument.
-- User asked 2026-11-16 that notes be elaborate, not rushed: Module 0.1 was rewritten to this standard (about 7,500 words of notes). Every section: the idea in plain words and why probability needs it, the precise definition, worked examples (taxi stand), common mistakes, quick checks with answers; proofs start with a one-line plan. Write all future modules this way. Module 0.2 was written before this request in the compressed style; offer to expand it.
+- User asked 2026-11-16 that notes be elaborate, not rushed: Module 0.1 was rewritten to this standard (about 7,500 words of notes). Every section: the idea in plain words and why probability needs it, the precise definition, worked examples (taxi stand), common mistakes, quick checks with answers; proofs start with a one-line plan. Write all future modules this way. Module 0.2 was expanded to the same standard on 2026-11-16 (about 8,000 words of notes; theorem numbers unchanged).
 
 ## Problem-set format (every module, "PS <module>")
 - 20–25 problems: I Intuition (2–3), A Drill (6–8), B Proof (6–8), C Engineering (3–5), D Code lab in Python (1–2), T Taxi thread (1).
