@@ -295,7 +295,8 @@ async function loadModule(code) {
   const d = await getDraft(code);
   if (!d || !d.notes) throw new Error('missing');
   const m = modInfo(code) || { name: d.title, track: '' };
-  const problems = parseProblems(['p1', 'p2', 'p3', 'p4'].map(k => (d.parts || {})[k] || '').join('\n\n'));
+  const problems = parseProblems(STEPS.filter(s => s.ids).map(s => (d.parts || {})[s.key] || '').join('\n\n'))
+    .sort((a, b) => ORDER.indexOf(a.id) - ORDER.indexOf(b.id));
   const M = { id: code, title: m.name, track: m.track, weeks: 'Draft generated ' + new Date(d.startedAt || Date.now()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }),
     notesHtml: mdToHtml(d.notes), notesSrc: d.notes, problems, draft: true, status: d.status };
   if (d.status === 'complete') MOD[code] = M; else if (!GEN[code]) GEN[code] = { running: false, step: 0, chars: 0, error: '', d };
@@ -395,7 +396,7 @@ function viewPreview(code) {
     <h1>Module ${esc(code)}: ${esc(m.name)}</h1>
     <p class="muted small">${esc(m.track)} track · ${m.finish ? 'planned finish ' + fmt(m.finish) : 'optional module'} ${m.core ? ' · <span class="chip y">Research core</span>' : ''}</p>
     <div class="card"><b>Notes and problem set not written yet.</b>
-      ${sample ? `<p class="small" style="margin:6px 0">Generate a draft now: Claude writes the notes and 23 problems with hints and solutions in five parts, about 3 to 6 minutes, using your Claude usage. Keep this page open; if it stops, Continue picks up where it left off.</p><div id="gen">${genHTML(code)}</div>` : `<p class="small" style="margin:6px 0">${standalone ? `Generating on the spot works in <a href="${LINKS.claude}">the Claude version</a>.` : 'Generating on the spot is not available in this view.'}</p>`}
+      ${sample ? `<p class="small" style="margin:6px 0">Generate a draft now: Claude writes the notes and 23 problems with hints and solutions in seven parts, about 5 to 10 minutes, using your Claude usage. Keep this page open; if it stops, Continue picks up where it left off.</p><div id="gen">${genHTML(code)}</div>` : `<p class="small" style="margin:6px 0">${standalone ? `Generating on the spot works in <a href="${LINKS.claude}">the Claude version</a>.` : 'Generating on the spot is not available in this view.'}</p>`}
       <div class="row" style="margin-top:10px"><button class="${req ? 'on' : ''}" data-act="request" data-code="${esc(code)}">${req ? 'Reviewed version requested ✓' : 'Request the reviewed version'}</button><span class="small muted">I write and check it in the project chat.</span></div></div>
     <h2>What you will learn</h2><p class="prose">${esc(o.topics || '')}</p>
     <h2>Why it matters for your research</h2><p class="prose">${esc(o.why || '')}</p>
@@ -451,10 +452,19 @@ function render() {
 /* ---------- generate a module on the spot ---------- */
 const STEPS = [
   { key: 'notes', label: 'Notes' },
-  { key: 'p1', label: 'Intuition and drill problems (I1–I3, A1–A7)', ids: ['I1', 'I2', 'I3', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7'] },
-  { key: 'p2', label: 'Proofs B1–B4', ids: ['B1', 'B2', 'B3', 'B4'] },
-  { key: 'p3', label: 'Proofs B5–B8', ids: ['B5', 'B6', 'B7', 'B8'] },
-  { key: 'p4', label: 'Engineering, code lab and taxi thread (C1–C3, D1, T1)', ids: ['C1', 'C2', 'C3', 'D1', 'T1'] }];
+  { key: 'p1', label: 'Intuition I1–I3 and drills A1–A3', ids: ['I1', 'I2', 'I3', 'A1', 'A2', 'A3'] },
+  { key: 'p2', label: 'Drills A4–A7', ids: ['A4', 'A5', 'A6', 'A7'] },
+  { key: 'p3', label: 'Proofs B1–B4', ids: ['B1', 'B2', 'B3', 'B4'] },
+  { key: 'p4', label: 'Proofs B5–B8', ids: ['B5', 'B6', 'B7', 'B8'] },
+  { key: 'p5', label: 'Engineering C1–C3', ids: ['C1', 'C2', 'C3'] },
+  { key: 'p6', label: 'Code lab D1 and taxi thread T1', ids: ['D1', 'T1'] }];
+const ORDER = STEPS.flatMap(s => s.ids || []);
+function rawProblems(src) {
+  return ('\n' + String(src || '').trim()).split(/\n### /).slice(1).map(chunk => {
+    const id = chunk.slice(0, chunk.indexOf('\n') < 0 ? chunk.length : chunk.indexOf('\n')).trim().replace(/[^A-Za-z0-9-]/g, '');
+    return { id, raw: '### ' + chunk.trim(), done: /\n#### Solution[ \t]*\n[\s\S]*\S/.test(chunk) };
+  });
+}
 function genHTML(code) {
   const g = GEN[code] || {}, d = g.d || {};
   const done = s => s.key === 'notes' ? !!d.notes : !!(d.parts || {})[s.key];
@@ -467,7 +477,7 @@ function genHTML(code) {
   return `${g.running || started ? `<ol class="gen small">${items}</ol>` : ''}${g.error ? `<p class="small" style="color:var(--warn)">${esc(g.error)}</p>` : ''}<div class="row">${btn}</div>`;
 }
 function updateGen(code) { const el = $('#gen'); if (el && location.hash === hashOf(code)) el.innerHTML = genHTML(code); }
-function genPrompt(step, m, notes) {
+function genPrompt(step, m, notes, ids) {
   const o = m.outline || {}, phase = Number(m.code[0]);
   const needs = (o.needs || []).map(c => { const n = modInfo(c); return c + ' ' + (n ? n.name : ''); }).join('; ') || 'none';
   const ctx = `You are writing Module ${m.code}: ${m.name}, part of a rigorous, research-aligned probability curriculum for a PhD student in transportation operations research (airport taxi dispatch, continuous-time Markov chains, QBDs, uniformization, dynamic pricing).
@@ -485,7 +495,7 @@ The module notes, for context:
 ${notes}
 </notes>
 
-Write problems ${step.ids.join(', ')} for this module. Tiers: I = intuition (explain in plain words or predict, little computation); A = drill (computations and standard results); B = proof (prove or disprove; counterexamples); C = engineering (model a taxi-stand situation and get a number or a precise statement); D = code lab (Python with NumPy or SciPy that checks a result numerically); T = taxi thread (one step of the case study, matching this phase's taxi-thread step).
+Write problems ${ids.join(', ')} for this module. Tiers: I = intuition (explain in plain words or predict, little computation); A = drill (computations and standard results); B = proof (prove or disprove; counterexamples); C = engineering (model a taxi-stand situation and get a number or a precise statement); D = code lab (Python with NumPy or SciPy that checks a result numerically); T = taxi thread (one step of the case study, matching this phase's taxi-thread step).
 Use exactly this format for each problem, and exactly these IDs in this order, nothing else:
 ### <ID>
 <problem statement>
@@ -506,19 +516,37 @@ async function genModule(code) {
     const st = STEPS[i];
     if (st.key === 'notes' ? d.notes : d.parts[st.key]) continue;
     g.step = i + 1; g.chars = 0; updateGen(code);
-    let text = '';
-    for (let attempt = 0; attempt < 2 && !text; attempt++) {
+    const onText = ({ text: t }) => { g.chars = t.length; updateGen(code); };
+    let text = '', need = null;
+    if (st.ids) { text = (d.pend || {})[st.key] || ''; need = st.ids.filter(x => !rawProblems(text).some(q => q.id === x && q.done)); }
+    for (let attempt = 0; attempt < 2; attempt++) {
       try {
-        const r = await sample(genPrompt(st, m, d.notes), { modelTier: 'complex', onText: ({ text: t }) => { g.chars = t.length; updateGen(code); } });
+        const r = await sample(genPrompt(st, m, d.notes, need), { modelTier: 'complex', cache: false, onText });
         const t = (r.text || '').trim();
-        const ok = st.ids ? st.ids.every(x => parseProblems(t).some(p => p.id === x)) : t.length > 2500;
-        if (ok && !r.truncated) text = t;
+        if (!st.ids) { if (!r.truncated && t.length > 2500) { text = t; break; } continue; }
+        let all = rawProblems(t); if (r.truncated) all = all.slice(0, -1);
+        const got = all.filter(q => q.done && need.includes(q.id));
+        if (got.length) {
+          text = (text ? text + '\n\n' : '') + got.map(q => q.raw).join('\n\n');
+          need = need.filter(x => !got.some(q => q.id === x));
+          d.pend = Object.assign({}, d.pend, { [st.key]: text });
+        }
+        if (!need.length) break;
       } catch (e) {
-        g.error = e && e.code === 'rate_limited' ? 'Claude is busy right now. Tap Continue in a few minutes.' : e && e.code === 'not_granted' ? 'Generating needs Claude access in this view.' : 'Generation stopped. Tap Continue to retry.';
+        g.error = e && e.code === 'rate_limited' ? 'Claude is busy or your usage limit is reached. Tap Continue later.'
+          : e && (e.code === 'not_granted' || e.code === 'sampling_disabled') ? 'Claude access was not allowed for this page, so it cannot generate here.'
+          : e && e.code === 'session_expired' ? 'Sign in to Claude again, then tap Continue.'
+          : 'Generation stopped. Tap Continue to retry.';
         break;
       }
     }
-    if (!text) { if (!g.error) g.error = 'Part ' + (i + 1) + ' did not come back complete. Tap Continue to retry it.'; break; }
+    const complete = st.ids ? !need.length : !!text;
+    if (!complete) {
+      if (st.ids && d.pend && d.pend[st.key]) { try { if (dref) await dref.set(d); else localStorage.setItem('psq-draft-' + code, JSON.stringify(d)); } catch (e) {} }
+      if (!g.error) g.error = st.ids ? 'Still missing ' + need.join(', ') + '. Tap Continue to ask for just those.' : 'The notes did not come back complete. Tap Continue to retry.';
+      break;
+    }
+    if (st.ids && d.pend) delete d.pend[st.key];
     if (st.key === 'notes') d.notes = text; else d.parts[st.key] = text;
     d.status = STEPS.every(s => s.key === 'notes' ? d.notes : d.parts[s.key]) ? 'complete' : 'partial';
     if (d.status === 'complete') d.finishedAt = Date.now();
