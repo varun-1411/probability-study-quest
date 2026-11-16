@@ -29,3 +29,19 @@ This repo is the home of the course, independent of any one Claude account. From
 ## Your progress
 
 Progress is not stored in this repo. Download a backup from the app now and then, and keep it somewhere safe; *Rewards → Restore from file* loads it into either version of the app.
+
+## Moving to a new Claude account
+
+Claude accounts cannot change their email address, and conversations, projects and memory do not transfer between personal accounts. Everything the course needs is in this repo, so a new account can rebuild it in about ten minutes.
+
+1. **In the old account:** *Rewards → Download backup* in the app. Optionally, in Settings, export your memory as text.
+2. **In the new account, make a project** (for example "prob theory") with the same description, and upload `CURRICULUM-INDEX.md` from this repo.
+3. **In a chat in that project, ask Claude:** "Set up my study app from github.com/varun-1411/probability-study-quest. Follow the README section *Moving to a new Claude account*." Claude then:
+   - publishes `docs/index.html`, `docs/plan.json` and every `docs/modules/*.json` as one artifact titled "Probability Study Quest", keeping the same paths;
+   - declares its capabilities as `{"db": {"rules": [{"path": "progress", "read": "admin", "write": "admin"}, {"path": "drafts", "read": "admin", "write": "admin"}]}, "downloads": {}, "sample": {}, "user": {}}`;
+   - sets `LINKS.claude` in `docs/index.html` to the new artifact's URL, republishes, and commits that change here (pushing needs the Claude GitHub app to have access to this repo);
+   - updates the app URL and slug in `CURRICULUM-INDEX.md` and in the project's copy of it.
+4. **Open the new app:** *Rewards → Restore from file* with your backup. Your XP, weeks, solved problems, doubts and rewards come back.
+5. **Memory (optional):** paste the exported memory into the new account's memory import (Settings), or just tell Claude the few things that matter.
+
+Unreviewed module drafts generated in the old app are not in the backup; reviewed modules are, because they live in this repo.
