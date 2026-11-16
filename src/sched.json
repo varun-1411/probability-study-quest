@@ -1,0 +1,1426 @@
+{
+ "rows": [
+  {
+   "cal": 1,
+   "study": 1,
+   "date": "2026-11-23",
+   "theory": "0.1 Proofs, sets, functions (1/2)",
+   "model": "0.3 Linear algebra & matrices (1/8)",
+   "boss": ""
+  },
+  {
+   "cal": 2,
+   "study": 2,
+   "date": "2026-11-30",
+   "theory": "0.1 Proofs, sets, functions (2/2)",
+   "model": "0.3 Linear algebra & matrices (2/8)",
+   "boss": ""
+  },
+  {
+   "cal": 3,
+   "study": 3,
+   "date": "2026-12-07",
+   "theory": "0.2 Real analysis (1/10)",
+   "model": "0.3 Linear algebra & matrices (3/8)",
+   "boss": ""
+  },
+  {
+   "cal": 4,
+   "study": 4,
+   "date": "2026-12-14",
+   "theory": "0.2 Real analysis (2/10)",
+   "model": "0.3 Linear algebra & matrices (4/8)",
+   "boss": ""
+  },
+  {
+   "cal": 5,
+   "study": 5,
+   "date": "2026-12-21",
+   "theory": "0.2 Real analysis (3/10)",
+   "model": "0.3 Linear algebra & matrices (5/8)",
+   "boss": ""
+  },
+  {
+   "cal": 6,
+   "study": 6,
+   "date": "2026-12-28",
+   "theory": "0.2 Real analysis (4/10)",
+   "model": "0.3 Linear algebra & matrices (6/8)",
+   "boss": ""
+  },
+  {
+   "cal": 7,
+   "study": 7,
+   "date": "2027-01-04",
+   "theory": "0.2 Real analysis (5/10)",
+   "model": "0.3 Linear algebra & matrices (7/8)",
+   "boss": ""
+  },
+  {
+   "cal": 8,
+   "study": 8,
+   "date": "2027-01-11",
+   "theory": "0.2 Real analysis (6/10)",
+   "model": "0.3 Linear algebra & matrices (8/8)",
+   "boss": ""
+  },
+  {
+   "cal": 9,
+   "study": 9,
+   "date": "2027-01-18",
+   "theory": "0.2 Real analysis (7/10)",
+   "model": "0.8 ODEs & transforms (1/6)",
+   "boss": ""
+  },
+  {
+   "cal": 10,
+   "study": 10,
+   "date": "2027-01-25",
+   "theory": "0.2 Real analysis (8/10)",
+   "model": "0.8 ODEs & transforms (2/6)",
+   "boss": ""
+  },
+  {
+   "cal": 11,
+   "study": 11,
+   "date": "2027-02-01",
+   "theory": "0.2 Real analysis (9/10)",
+   "model": "0.8 ODEs & transforms (3/6)",
+   "boss": ""
+  },
+  {
+   "cal": 12,
+   "study": 12,
+   "date": "2027-02-08",
+   "theory": "0.2 Real analysis (10/10)",
+   "model": "0.8 ODEs & transforms (4/6)",
+   "boss": ""
+  },
+  {
+   "cal": 13,
+   "study": "",
+   "date": "2027-02-15",
+   "theory": "BOSS WEEK 1: review + exit checks",
+   "model": "BOSS WEEK 1: catch-up + reward",
+   "boss": "Boss 1"
+  },
+  {
+   "cal": 14,
+   "study": 13,
+   "date": "2027-02-22",
+   "theory": "0.4 Multivariable calculus (1/2)",
+   "model": "0.8 ODEs & transforms (5/6)",
+   "boss": ""
+  },
+  {
+   "cal": 15,
+   "study": 14,
+   "date": "2027-03-01",
+   "theory": "0.4 Multivariable calculus (2/2)",
+   "model": "0.8 ODEs & transforms (6/6)",
+   "boss": ""
+  },
+  {
+   "cal": 16,
+   "study": 15,
+   "date": "2027-03-08",
+   "theory": "0.5 Measure theory (1/12)",
+   "model": "0.6 Optimization (1/4)",
+   "boss": ""
+  },
+  {
+   "cal": 17,
+   "study": 16,
+   "date": "2027-03-15",
+   "theory": "0.5 Measure theory (2/12)",
+   "model": "0.6 Optimization (2/4)",
+   "boss": ""
+  },
+  {
+   "cal": 18,
+   "study": 17,
+   "date": "2027-03-22",
+   "theory": "0.5 Measure theory (3/12)",
+   "model": "0.6 Optimization (3/4)",
+   "boss": ""
+  },
+  {
+   "cal": 19,
+   "study": 18,
+   "date": "2027-03-29",
+   "theory": "0.5 Measure theory (4/12)",
+   "model": "0.6 Optimization (4/4)",
+   "boss": ""
+  },
+  {
+   "cal": 20,
+   "study": 19,
+   "date": "2027-04-05",
+   "theory": "0.5 Measure theory (5/12)",
+   "model": "3.1 Discrete-time Markov chains (1/4)",
+   "boss": ""
+  },
+  {
+   "cal": 21,
+   "study": 20,
+   "date": "2027-04-12",
+   "theory": "0.5 Measure theory (6/12)",
+   "model": "3.1 Discrete-time Markov chains (2/4)",
+   "boss": ""
+  },
+  {
+   "cal": 22,
+   "study": 21,
+   "date": "2027-04-19",
+   "theory": "0.5 Measure theory (7/12)",
+   "model": "3.1 Discrete-time Markov chains (3/4)",
+   "boss": ""
+  },
+  {
+   "cal": 23,
+   "study": 22,
+   "date": "2027-04-26",
+   "theory": "0.5 Measure theory (8/12)",
+   "model": "3.1 Discrete-time Markov chains (4/4)",
+   "boss": ""
+  },
+  {
+   "cal": 24,
+   "study": 23,
+   "date": "2027-05-03",
+   "theory": "0.5 Measure theory (9/12)",
+   "model": "3.2 Poisson & renewal (1/6)",
+   "boss": ""
+  },
+  {
+   "cal": 25,
+   "study": 24,
+   "date": "2027-05-10",
+   "theory": "0.5 Measure theory (10/12)",
+   "model": "3.2 Poisson & renewal (2/6)",
+   "boss": ""
+  },
+  {
+   "cal": 26,
+   "study": "",
+   "date": "2027-05-17",
+   "theory": "BOSS WEEK 2: review + exit checks",
+   "model": "BOSS WEEK 2: catch-up + reward",
+   "boss": "Boss 2"
+  },
+  {
+   "cal": 27,
+   "study": 25,
+   "date": "2027-05-24",
+   "theory": "0.5 Measure theory (11/12)",
+   "model": "3.2 Poisson & renewal (3/6)",
+   "boss": ""
+  },
+  {
+   "cal": 28,
+   "study": 26,
+   "date": "2027-05-31",
+   "theory": "0.5 Measure theory (12/12)",
+   "model": "3.2 Poisson & renewal (4/6)",
+   "boss": ""
+  },
+  {
+   "cal": 29,
+   "study": 27,
+   "date": "2027-06-07",
+   "theory": "0.7 Functional analysis (1/4)",
+   "model": "3.2 Poisson & renewal (5/6)",
+   "boss": ""
+  },
+  {
+   "cal": 30,
+   "study": 28,
+   "date": "2027-06-14",
+   "theory": "0.7 Functional analysis (2/4)",
+   "model": "3.2 Poisson & renewal (6/6)",
+   "boss": ""
+  },
+  {
+   "cal": 31,
+   "study": 29,
+   "date": "2027-06-21",
+   "theory": "0.7 Functional analysis (3/4)",
+   "model": "3.3 Continuous-time Markov chains (1/4)",
+   "boss": ""
+  },
+  {
+   "cal": 32,
+   "study": 30,
+   "date": "2027-06-28",
+   "theory": "0.7 Functional analysis (4/4)",
+   "model": "3.3 Continuous-time Markov chains (2/4)",
+   "boss": ""
+  },
+  {
+   "cal": 33,
+   "study": 31,
+   "date": "2027-07-05",
+   "theory": "1.1 Elementary probability (1/2)",
+   "model": "3.3 Continuous-time Markov chains (3/4)",
+   "boss": ""
+  },
+  {
+   "cal": 34,
+   "study": 32,
+   "date": "2027-07-12",
+   "theory": "1.1 Elementary probability (2/2)",
+   "model": "3.3 Continuous-time Markov chains (4/4)",
+   "boss": ""
+  },
+  {
+   "cal": 35,
+   "study": 33,
+   "date": "2027-07-19",
+   "theory": "1.2 Probability spaces & RVs (1/6)",
+   "model": "3.4 Queueing theory (1/8)",
+   "boss": ""
+  },
+  {
+   "cal": 36,
+   "study": 34,
+   "date": "2027-07-26",
+   "theory": "1.2 Probability spaces & RVs (2/6)",
+   "model": "3.4 Queueing theory (2/8)",
+   "boss": ""
+  },
+  {
+   "cal": 37,
+   "study": 35,
+   "date": "2027-08-02",
+   "theory": "1.2 Probability spaces & RVs (3/6)",
+   "model": "3.4 Queueing theory (3/8)",
+   "boss": ""
+  },
+  {
+   "cal": 38,
+   "study": 36,
+   "date": "2027-08-09",
+   "theory": "1.2 Probability spaces & RVs (4/6)",
+   "model": "3.4 Queueing theory (4/8)",
+   "boss": ""
+  },
+  {
+   "cal": 39,
+   "study": "",
+   "date": "2027-08-16",
+   "theory": "BOSS WEEK 3: review + exit checks",
+   "model": "BOSS WEEK 3: catch-up + reward",
+   "boss": "Boss 3"
+  },
+  {
+   "cal": 40,
+   "study": 37,
+   "date": "2027-08-23",
+   "theory": "1.2 Probability spaces & RVs (5/6)",
+   "model": "3.4 Queueing theory (5/8)",
+   "boss": ""
+  },
+  {
+   "cal": 41,
+   "study": 38,
+   "date": "2027-08-30",
+   "theory": "1.2 Probability spaces & RVs (6/6)",
+   "model": "3.4 Queueing theory (6/8)",
+   "boss": ""
+  },
+  {
+   "cal": 42,
+   "study": 39,
+   "date": "2027-09-06",
+   "theory": "1.3 Expectation & transforms (1/4)",
+   "model": "3.4 Queueing theory (7/8)",
+   "boss": ""
+  },
+  {
+   "cal": 43,
+   "study": 40,
+   "date": "2027-09-13",
+   "theory": "1.3 Expectation & transforms (2/4)",
+   "model": "3.4 Queueing theory (8/8)",
+   "boss": ""
+  },
+  {
+   "cal": 44,
+   "study": 41,
+   "date": "2027-09-20",
+   "theory": "1.3 Expectation & transforms (3/4)",
+   "model": "3.5 Matrix-analytic methods (1/6)",
+   "boss": ""
+  },
+  {
+   "cal": 45,
+   "study": 42,
+   "date": "2027-09-27",
+   "theory": "1.3 Expectation & transforms (4/4)",
+   "model": "3.5 Matrix-analytic methods (2/6)",
+   "boss": ""
+  },
+  {
+   "cal": 46,
+   "study": 43,
+   "date": "2027-10-04",
+   "theory": "1.4 Convergence & limit theorems (1/6)",
+   "model": "3.5 Matrix-analytic methods (3/6)",
+   "boss": ""
+  },
+  {
+   "cal": 47,
+   "study": 44,
+   "date": "2027-10-11",
+   "theory": "1.4 Convergence & limit theorems (2/6)",
+   "model": "3.5 Matrix-analytic methods (4/6)",
+   "boss": ""
+  },
+  {
+   "cal": 48,
+   "study": 45,
+   "date": "2027-10-18",
+   "theory": "1.4 Convergence & limit theorems (3/6)",
+   "model": "3.5 Matrix-analytic methods (5/6)",
+   "boss": ""
+  },
+  {
+   "cal": 49,
+   "study": 46,
+   "date": "2027-10-25",
+   "theory": "1.4 Convergence & limit theorems (4/6)",
+   "model": "3.5 Matrix-analytic methods (6/6)",
+   "boss": ""
+  },
+  {
+   "cal": 50,
+   "study": 47,
+   "date": "2027-11-01",
+   "theory": "1.4 Convergence & limit theorems (5/6)",
+   "model": "3.6 Simulation & gradients (1/6)",
+   "boss": ""
+  },
+  {
+   "cal": 51,
+   "study": 48,
+   "date": "2027-11-08",
+   "theory": "1.4 Convergence & limit theorems (6/6)",
+   "model": "3.6 Simulation & gradients (2/6)",
+   "boss": ""
+  },
+  {
+   "cal": 52,
+   "study": "",
+   "date": "2027-11-15",
+   "theory": "BOSS WEEK 4: review + exit checks",
+   "model": "BOSS WEEK 4: catch-up + reward",
+   "boss": "Boss 4"
+  },
+  {
+   "cal": 53,
+   "study": 49,
+   "date": "2027-11-22",
+   "theory": "1.5 Conditional expectation (1/3)",
+   "model": "3.6 Simulation & gradients (3/6)",
+   "boss": ""
+  },
+  {
+   "cal": 54,
+   "study": 50,
+   "date": "2027-11-29",
+   "theory": "1.5 Conditional expectation (2/3)",
+   "model": "3.6 Simulation & gradients (4/6)",
+   "boss": ""
+  },
+  {
+   "cal": 55,
+   "study": 51,
+   "date": "2027-12-06",
+   "theory": "1.5 Conditional expectation (3/3)",
+   "model": "3.6 Simulation & gradients (5/6)",
+   "boss": ""
+  },
+  {
+   "cal": 56,
+   "study": 52,
+   "date": "2027-12-13",
+   "theory": "1.6 Martingales & concentration (1/6)",
+   "model": "3.6 Simulation & gradients (6/6)",
+   "boss": ""
+  },
+  {
+   "cal": 57,
+   "study": 53,
+   "date": "2027-12-20",
+   "theory": "1.6 Martingales & concentration (2/6)",
+   "model": "3.7 Stochastic approximation (1/6)",
+   "boss": ""
+  },
+  {
+   "cal": 58,
+   "study": 54,
+   "date": "2027-12-27",
+   "theory": "1.6 Martingales & concentration (3/6)",
+   "model": "3.7 Stochastic approximation (2/6)",
+   "boss": ""
+  },
+  {
+   "cal": 59,
+   "study": 55,
+   "date": "2028-01-03",
+   "theory": "1.6 Martingales & concentration (4/6)",
+   "model": "3.7 Stochastic approximation (3/6)",
+   "boss": ""
+  },
+  {
+   "cal": 60,
+   "study": 56,
+   "date": "2028-01-10",
+   "theory": "1.6 Martingales & concentration (5/6)",
+   "model": "3.7 Stochastic approximation (4/6)",
+   "boss": ""
+  },
+  {
+   "cal": 61,
+   "study": 57,
+   "date": "2028-01-17",
+   "theory": "1.6 Martingales & concentration (6/6)",
+   "model": "3.7 Stochastic approximation (5/6)",
+   "boss": ""
+  },
+  {
+   "cal": 62,
+   "study": 58,
+   "date": "2028-01-24",
+   "theory": "2.1 Sampling & data reduction (1/4)",
+   "model": "3.7 Stochastic approximation (6/6)",
+   "boss": ""
+  },
+  {
+   "cal": 63,
+   "study": 59,
+   "date": "2028-01-31",
+   "theory": "2.1 Sampling & data reduction (2/4)",
+   "model": "3.9 Numerical methods for Markov chains (1/3)",
+   "boss": ""
+  },
+  {
+   "cal": 64,
+   "study": 60,
+   "date": "2028-02-07",
+   "theory": "2.1 Sampling & data reduction (3/4)",
+   "model": "3.9 Numerical methods for Markov chains (2/3)",
+   "boss": ""
+  },
+  {
+   "cal": 65,
+   "study": "",
+   "date": "2028-02-14",
+   "theory": "BOSS WEEK 5: review + exit checks",
+   "model": "BOSS WEEK 5: catch-up + reward",
+   "boss": "Boss 5"
+  },
+  {
+   "cal": 66,
+   "study": 61,
+   "date": "2028-02-21",
+   "theory": "2.1 Sampling & data reduction (4/4)",
+   "model": "3.9 Numerical methods for Markov chains (3/3)",
+   "boss": ""
+  },
+  {
+   "cal": 67,
+   "study": 62,
+   "date": "2028-02-28",
+   "theory": "2.2 Point estimation (1/4)",
+   "model": "4.1 Finite-horizon DP (1/4)",
+   "boss": ""
+  },
+  {
+   "cal": 68,
+   "study": 63,
+   "date": "2028-03-06",
+   "theory": "2.2 Point estimation (2/4)",
+   "model": "4.1 Finite-horizon DP (2/4)",
+   "boss": ""
+  },
+  {
+   "cal": 69,
+   "study": 64,
+   "date": "2028-03-13",
+   "theory": "2.2 Point estimation (3/4)",
+   "model": "4.1 Finite-horizon DP (3/4)",
+   "boss": ""
+  },
+  {
+   "cal": 70,
+   "study": 65,
+   "date": "2028-03-20",
+   "theory": "2.2 Point estimation (4/4)",
+   "model": "4.1 Finite-horizon DP (4/4)",
+   "boss": ""
+  },
+  {
+   "cal": 71,
+   "study": 66,
+   "date": "2028-03-27",
+   "theory": "2.3 Tests & intervals (1/4)",
+   "model": "4.2 Discounted MDPs (1/4)",
+   "boss": ""
+  },
+  {
+   "cal": 72,
+   "study": 67,
+   "date": "2028-04-03",
+   "theory": "2.3 Tests & intervals (2/4)",
+   "model": "4.2 Discounted MDPs (2/4)",
+   "boss": ""
+  },
+  {
+   "cal": 73,
+   "study": 68,
+   "date": "2028-04-10",
+   "theory": "2.3 Tests & intervals (3/4)",
+   "model": "4.2 Discounted MDPs (3/4)",
+   "boss": ""
+  },
+  {
+   "cal": 74,
+   "study": 69,
+   "date": "2028-04-17",
+   "theory": "2.3 Tests & intervals (4/4)",
+   "model": "4.2 Discounted MDPs (4/4)",
+   "boss": ""
+  },
+  {
+   "cal": 75,
+   "study": 70,
+   "date": "2028-04-24",
+   "theory": "2.4 Asymptotic theory (1/4)",
+   "model": "4.3 Average & total cost (1/4)",
+   "boss": ""
+  },
+  {
+   "cal": 76,
+   "study": 71,
+   "date": "2028-05-01",
+   "theory": "2.4 Asymptotic theory (2/4)",
+   "model": "4.3 Average & total cost (2/4)",
+   "boss": ""
+  },
+  {
+   "cal": 77,
+   "study": 72,
+   "date": "2028-05-08",
+   "theory": "2.4 Asymptotic theory (3/4)",
+   "model": "4.3 Average & total cost (3/4)",
+   "boss": ""
+  },
+  {
+   "cal": 78,
+   "study": "",
+   "date": "2028-05-15",
+   "theory": "BOSS WEEK 6: review + exit checks",
+   "model": "BOSS WEEK 6: catch-up + reward",
+   "boss": "Boss 6"
+  },
+  {
+   "cal": 79,
+   "study": 73,
+   "date": "2028-05-22",
+   "theory": "2.4 Asymptotic theory (4/4)",
+   "model": "4.3 Average & total cost (4/4)",
+   "boss": ""
+  },
+  {
+   "cal": 80,
+   "study": 74,
+   "date": "2028-05-29",
+   "theory": "2.5 Regression & linear models (1/4)",
+   "model": "4.4 Control of queues (1/6)",
+   "boss": ""
+  },
+  {
+   "cal": 81,
+   "study": 75,
+   "date": "2028-06-05",
+   "theory": "2.5 Regression & linear models (2/4)",
+   "model": "4.4 Control of queues (2/6)",
+   "boss": ""
+  },
+  {
+   "cal": 82,
+   "study": 76,
+   "date": "2028-06-12",
+   "theory": "2.5 Regression & linear models (3/4)",
+   "model": "4.4 Control of queues (3/6)",
+   "boss": ""
+  },
+  {
+   "cal": 83,
+   "study": 77,
+   "date": "2028-06-19",
+   "theory": "2.5 Regression & linear models (4/4)",
+   "model": "4.4 Control of queues (4/6)",
+   "boss": ""
+  },
+  {
+   "cal": 84,
+   "study": 78,
+   "date": "2028-06-26",
+   "theory": "2.6 Bayesian & computational (1/4)",
+   "model": "4.4 Control of queues (5/6)",
+   "boss": ""
+  },
+  {
+   "cal": 85,
+   "study": 79,
+   "date": "2028-07-03",
+   "theory": "2.6 Bayesian & computational (2/4)",
+   "model": "4.4 Control of queues (6/6)",
+   "boss": ""
+  },
+  {
+   "cal": 86,
+   "study": 80,
+   "date": "2028-07-10",
+   "theory": "2.6 Bayesian & computational (3/4)",
+   "model": "4.5 Constrained MDPs & POMDPs (1/2)",
+   "boss": ""
+  },
+  {
+   "cal": 87,
+   "study": 81,
+   "date": "2028-07-17",
+   "theory": "2.6 Bayesian & computational (4/4)",
+   "model": "4.5 Constrained MDPs & POMDPs (2/2)",
+   "boss": ""
+  },
+  {
+   "cal": 88,
+   "study": 82,
+   "date": "2028-07-24",
+   "theory": "2.7 Input/output analysis (1/4)",
+   "model": "4.6 Approximate DP (1/6)",
+   "boss": ""
+  },
+  {
+   "cal": 89,
+   "study": 83,
+   "date": "2028-07-31",
+   "theory": "2.7 Input/output analysis (2/4)",
+   "model": "4.6 Approximate DP (2/6)",
+   "boss": ""
+  },
+  {
+   "cal": 90,
+   "study": 84,
+   "date": "2028-08-07",
+   "theory": "2.7 Input/output analysis (3/4)",
+   "model": "4.6 Approximate DP (3/6)",
+   "boss": ""
+  },
+  {
+   "cal": 91,
+   "study": "",
+   "date": "2028-08-14",
+   "theory": "BOSS WEEK 7: review + exit checks",
+   "model": "BOSS WEEK 7: catch-up + reward",
+   "boss": "Boss 7"
+  },
+  {
+   "cal": 92,
+   "study": 85,
+   "date": "2028-08-21",
+   "theory": "2.7 Input/output analysis (4/4)",
+   "model": "4.6 Approximate DP (4/6)",
+   "boss": ""
+  },
+  {
+   "cal": 93,
+   "study": 86,
+   "date": "2028-08-28",
+   "theory": "6.1 Strategic & extensive games (1/6)",
+   "model": "4.6 Approximate DP (5/6)",
+   "boss": ""
+  },
+  {
+   "cal": 94,
+   "study": 87,
+   "date": "2028-09-04",
+   "theory": "6.1 Strategic & extensive games (2/6)",
+   "model": "4.6 Approximate DP (6/6)",
+   "boss": ""
+  },
+  {
+   "cal": 95,
+   "study": 88,
+   "date": "2028-09-11",
+   "theory": "6.1 Strategic & extensive games (3/6)",
+   "model": "5.1 Tabular RL review (1/2)",
+   "boss": ""
+  },
+  {
+   "cal": 96,
+   "study": 89,
+   "date": "2028-09-18",
+   "theory": "6.1 Strategic & extensive games (4/6)",
+   "model": "5.1 Tabular RL review (2/2)",
+   "boss": ""
+  },
+  {
+   "cal": 97,
+   "study": 90,
+   "date": "2028-09-25",
+   "theory": "6.1 Strategic & extensive games (5/6)",
+   "model": "5.2 RL convergence theory (1/6)",
+   "boss": ""
+  },
+  {
+   "cal": 98,
+   "study": 91,
+   "date": "2028-10-02",
+   "theory": "6.1 Strategic & extensive games (6/6)",
+   "model": "5.2 RL convergence theory (2/6)",
+   "boss": ""
+  },
+  {
+   "cal": 99,
+   "study": 92,
+   "date": "2028-10-09",
+   "theory": "6.2 Repeated & stochastic games (1/4)",
+   "model": "5.2 RL convergence theory (3/6)",
+   "boss": ""
+  },
+  {
+   "cal": 100,
+   "study": 93,
+   "date": "2028-10-16",
+   "theory": "6.2 Repeated & stochastic games (2/4)",
+   "model": "5.2 RL convergence theory (4/6)",
+   "boss": ""
+  },
+  {
+   "cal": 101,
+   "study": 94,
+   "date": "2028-10-23",
+   "theory": "6.2 Repeated & stochastic games (3/4)",
+   "model": "5.2 RL convergence theory (5/6)",
+   "boss": ""
+  },
+  {
+   "cal": 102,
+   "study": 95,
+   "date": "2028-10-30",
+   "theory": "6.2 Repeated & stochastic games (4/4)",
+   "model": "5.2 RL convergence theory (6/6)",
+   "boss": ""
+  },
+  {
+   "cal": 103,
+   "study": 96,
+   "date": "2028-11-06",
+   "theory": "6.3 Algorithmic GT & mechanisms (1/4)",
+   "model": "5.3 Bandits (1/4)",
+   "boss": ""
+  },
+  {
+   "cal": 104,
+   "study": "",
+   "date": "2028-11-13",
+   "theory": "BOSS WEEK 8: review + exit checks",
+   "model": "BOSS WEEK 8: catch-up + reward",
+   "boss": "Boss 8"
+  },
+  {
+   "cal": 105,
+   "study": 97,
+   "date": "2028-11-20",
+   "theory": "6.3 Algorithmic GT & mechanisms (2/4)",
+   "model": "5.3 Bandits (2/4)",
+   "boss": ""
+  },
+  {
+   "cal": 106,
+   "study": 98,
+   "date": "2028-11-27",
+   "theory": "6.3 Algorithmic GT & mechanisms (3/4)",
+   "model": "5.3 Bandits (3/4)",
+   "boss": ""
+  },
+  {
+   "cal": 107,
+   "study": 99,
+   "date": "2028-12-04",
+   "theory": "6.3 Algorithmic GT & mechanisms (4/4)",
+   "model": "5.3 Bandits (4/4)",
+   "boss": ""
+  },
+  {
+   "cal": 108,
+   "study": 100,
+   "date": "2028-12-11",
+   "theory": "6.4 Congestion & traffic equilibrium (1/2)",
+   "model": "5.4 Policy gradient & actor-critic (1/6)",
+   "boss": ""
+  },
+  {
+   "cal": 109,
+   "study": 101,
+   "date": "2028-12-18",
+   "theory": "6.4 Congestion & traffic equilibrium (2/2)",
+   "model": "5.4 Policy gradient & actor-critic (2/6)",
+   "boss": ""
+  },
+  {
+   "cal": 110,
+   "study": 102,
+   "date": "2028-12-25",
+   "theory": "6.5 Queueing games & platforms (1/6)",
+   "model": "5.4 Policy gradient & actor-critic (3/6)",
+   "boss": ""
+  },
+  {
+   "cal": 111,
+   "study": 103,
+   "date": "2029-01-01",
+   "theory": "6.5 Queueing games & platforms (2/6)",
+   "model": "5.4 Policy gradient & actor-critic (4/6)",
+   "boss": ""
+  },
+  {
+   "cal": 112,
+   "study": 104,
+   "date": "2029-01-08",
+   "theory": "6.5 Queueing games & platforms (3/6)",
+   "model": "5.4 Policy gradient & actor-critic (5/6)",
+   "boss": ""
+  },
+  {
+   "cal": 113,
+   "study": 105,
+   "date": "2029-01-15",
+   "theory": "6.5 Queueing games & platforms (4/6)",
+   "model": "5.4 Policy gradient & actor-critic (6/6)",
+   "boss": ""
+  },
+  {
+   "cal": 114,
+   "study": 106,
+   "date": "2029-01-22",
+   "theory": "6.5 Queueing games & platforms (5/6)",
+   "model": "5.6 Deep RL for operations (1/6)",
+   "boss": ""
+  },
+  {
+   "cal": 115,
+   "study": 107,
+   "date": "2029-01-29",
+   "theory": "6.5 Queueing games & platforms (6/6)",
+   "model": "5.6 Deep RL for operations (2/6)",
+   "boss": ""
+  },
+  {
+   "cal": 116,
+   "study": 108,
+   "date": "2029-02-05",
+   "theory": "4.7 Revenue management & pricing (1/4)",
+   "model": "5.6 Deep RL for operations (3/6)",
+   "boss": ""
+  },
+  {
+   "cal": 117,
+   "study": "",
+   "date": "2029-02-12",
+   "theory": "BOSS WEEK 9: review + exit checks",
+   "model": "BOSS WEEK 9: catch-up + reward",
+   "boss": "Boss 9"
+  },
+  {
+   "cal": 118,
+   "study": 109,
+   "date": "2029-02-19",
+   "theory": "4.7 Revenue management & pricing (2/4)",
+   "model": "5.6 Deep RL for operations (4/6)",
+   "boss": ""
+  },
+  {
+   "cal": 119,
+   "study": 110,
+   "date": "2029-02-26",
+   "theory": "4.7 Revenue management & pricing (3/4)",
+   "model": "5.6 Deep RL for operations (5/6)",
+   "boss": ""
+  },
+  {
+   "cal": 120,
+   "study": 111,
+   "date": "2029-03-05",
+   "theory": "4.7 Revenue management & pricing (4/4)",
+   "model": "5.6 Deep RL for operations (6/6)",
+   "boss": ""
+  },
+  {
+   "cal": 121,
+   "study": "",
+   "date": "2029-03-12",
+   "theory": "BOSS WEEK 10: review + exit checks",
+   "model": "BOSS WEEK 10: catch-up + reward",
+   "boss": "Boss 10"
+  }
+ ],
+ "spans": {
+  "th-found": [
+   "2026-11-23",
+   "2027-07-04"
+  ],
+  "th-prob": [
+   "2027-07-05",
+   "2028-01-23"
+  ],
+  "th-stat": [
+   "2028-01-24",
+   "2028-08-27"
+  ],
+  "th-game": [
+   "2028-08-28",
+   "2029-02-04"
+  ],
+  "mo-found": [
+   "2026-11-23",
+   "2027-04-04"
+  ],
+  "mo-proc": [
+   "2027-04-05",
+   "2028-02-27"
+  ],
+  "mo-mdp": [
+   "2028-02-28",
+   "2028-09-10"
+  ],
+  "mo-rl": [
+   "2028-09-11",
+   "2029-03-11"
+  ]
+ },
+ "fin": {
+  "0.1": [
+   2,
+   "2026-11-30"
+  ],
+  "0.3": [
+   8,
+   "2027-01-11"
+  ],
+  "0.2": [
+   12,
+   "2027-02-08"
+  ],
+  "0.8": [
+   15,
+   "2027-03-01"
+  ],
+  "0.4": [
+   15,
+   "2027-03-01"
+  ],
+  "0.5": [
+   28,
+   "2027-05-31"
+  ],
+  "0.6": [
+   19,
+   "2027-03-29"
+  ],
+  "3.1": [
+   23,
+   "2027-04-26"
+  ],
+  "3.2": [
+   30,
+   "2027-06-14"
+  ],
+  "0.7": [
+   32,
+   "2027-06-28"
+  ],
+  "3.3": [
+   34,
+   "2027-07-12"
+  ],
+  "1.1": [
+   34,
+   "2027-07-12"
+  ],
+  "1.2": [
+   41,
+   "2027-08-30"
+  ],
+  "3.4": [
+   43,
+   "2027-09-13"
+  ],
+  "1.3": [
+   45,
+   "2027-09-27"
+  ],
+  "3.5": [
+   49,
+   "2027-10-25"
+  ],
+  "1.4": [
+   51,
+   "2027-11-08"
+  ],
+  "3.6": [
+   56,
+   "2027-12-13"
+  ],
+  "1.5": [
+   55,
+   "2027-12-06"
+  ],
+  "1.6": [
+   61,
+   "2028-01-17"
+  ],
+  "3.7": [
+   62,
+   "2028-01-24"
+  ],
+  "2.1": [
+   66,
+   "2028-02-21"
+  ],
+  "3.9": [
+   66,
+   "2028-02-21"
+  ],
+  "2.2": [
+   70,
+   "2028-03-20"
+  ],
+  "4.1": [
+   70,
+   "2028-03-20"
+  ],
+  "2.3": [
+   74,
+   "2028-04-17"
+  ],
+  "4.2": [
+   74,
+   "2028-04-17"
+  ],
+  "2.4": [
+   79,
+   "2028-05-22"
+  ],
+  "4.3": [
+   79,
+   "2028-05-22"
+  ],
+  "2.5": [
+   83,
+   "2028-06-19"
+  ],
+  "4.4": [
+   85,
+   "2028-07-03"
+  ],
+  "2.6": [
+   87,
+   "2028-07-17"
+  ],
+  "4.5": [
+   87,
+   "2028-07-17"
+  ],
+  "2.7": [
+   92,
+   "2028-08-21"
+  ],
+  "4.6": [
+   94,
+   "2028-09-04"
+  ],
+  "6.1": [
+   98,
+   "2028-10-02"
+  ],
+  "5.1": [
+   96,
+   "2028-09-18"
+  ],
+  "5.2": [
+   102,
+   "2028-10-30"
+  ],
+  "6.2": [
+   102,
+   "2028-10-30"
+  ],
+  "6.3": [
+   107,
+   "2028-12-04"
+  ],
+  "5.3": [
+   107,
+   "2028-12-04"
+  ],
+  "6.4": [
+   109,
+   "2028-12-18"
+  ],
+  "5.4": [
+   113,
+   "2029-01-15"
+  ],
+  "6.5": [
+   115,
+   "2029-01-29"
+  ],
+  "5.6": [
+   120,
+   "2029-03-05"
+  ],
+  "4.7": [
+   120,
+   "2029-03-05"
+  ]
+ },
+ "theory": [
+  [
+   "0.1",
+   "Proofs, sets, functions",
+   12
+  ],
+  [
+   "0.2",
+   "Real analysis",
+   60
+  ],
+  [
+   "0.4",
+   "Multivariable calculus",
+   12
+  ],
+  [
+   "0.5",
+   "Measure theory",
+   72
+  ],
+  [
+   "0.7",
+   "Functional analysis",
+   24
+  ],
+  [
+   "1.1",
+   "Elementary probability",
+   12
+  ],
+  [
+   "1.2",
+   "Probability spaces & RVs",
+   36
+  ],
+  [
+   "1.3",
+   "Expectation & transforms",
+   24
+  ],
+  [
+   "1.4",
+   "Convergence & limit theorems",
+   36
+  ],
+  [
+   "1.5",
+   "Conditional expectation",
+   18
+  ],
+  [
+   "1.6",
+   "Martingales & concentration",
+   36
+  ],
+  [
+   "2.1",
+   "Sampling & data reduction",
+   24
+  ],
+  [
+   "2.2",
+   "Point estimation",
+   24
+  ],
+  [
+   "2.3",
+   "Tests & intervals",
+   24
+  ],
+  [
+   "2.4",
+   "Asymptotic theory",
+   24
+  ],
+  [
+   "2.5",
+   "Regression & linear models",
+   24
+  ],
+  [
+   "2.6",
+   "Bayesian & computational",
+   24
+  ],
+  [
+   "2.7",
+   "Input/output analysis",
+   24
+  ],
+  [
+   "6.1",
+   "Strategic & extensive games",
+   36
+  ],
+  [
+   "6.2",
+   "Repeated & stochastic games",
+   24
+  ],
+  [
+   "6.3",
+   "Algorithmic GT & mechanisms",
+   24
+  ],
+  [
+   "6.4",
+   "Congestion & traffic equilibrium",
+   12
+  ],
+  [
+   "6.5",
+   "Queueing games & platforms",
+   36
+  ],
+  [
+   "4.7",
+   "Revenue management & pricing",
+   24
+  ]
+ ],
+ "model": [
+  [
+   "0.3",
+   "Linear algebra & matrices",
+   48
+  ],
+  [
+   "0.8",
+   "ODEs & transforms",
+   36
+  ],
+  [
+   "0.6",
+   "Optimization",
+   24
+  ],
+  [
+   "3.1",
+   "Discrete-time Markov chains",
+   24
+  ],
+  [
+   "3.2",
+   "Poisson & renewal",
+   36
+  ],
+  [
+   "3.3",
+   "Continuous-time Markov chains",
+   24
+  ],
+  [
+   "3.4",
+   "Queueing theory",
+   48
+  ],
+  [
+   "3.5",
+   "Matrix-analytic methods",
+   36
+  ],
+  [
+   "3.6",
+   "Simulation & gradients",
+   36
+  ],
+  [
+   "3.7",
+   "Stochastic approximation",
+   36
+  ],
+  [
+   "3.9",
+   "Numerical methods for Markov chains",
+   18
+  ],
+  [
+   "4.1",
+   "Finite-horizon DP",
+   24
+  ],
+  [
+   "4.2",
+   "Discounted MDPs",
+   24
+  ],
+  [
+   "4.3",
+   "Average & total cost",
+   24
+  ],
+  [
+   "4.4",
+   "Control of queues",
+   36
+  ],
+  [
+   "4.5",
+   "Constrained MDPs & POMDPs",
+   12
+  ],
+  [
+   "4.6",
+   "Approximate DP",
+   36
+  ],
+  [
+   "5.1",
+   "Tabular RL review",
+   12
+  ],
+  [
+   "5.2",
+   "RL convergence theory",
+   36
+  ],
+  [
+   "5.3",
+   "Bandits",
+   24
+  ],
+  [
+   "5.4",
+   "Policy gradient & actor-critic",
+   36
+  ],
+  [
+   "5.6",
+   "Deep RL for operations",
+   36
+  ]
+ ]
+}

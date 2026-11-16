@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Probability Study Quest</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap">
+<style>
+/* VOICE: a focused training log; calm and direct, a little playful only when you level up.
+   IDEA: the airport taxi stand: a taxi meter that ticks up XP, checkered taxi trim, modules as fares.
+   PICTURE: the meter (level, XP, bar to the next reward) and this week's two fares fill the first screen.
+   COLOUR and TYPE: white and ink with taxi yellow as the single accent; Barlow Condensed signage, Barlow body.
+   LAYOUT: sticky header with four tabs; one column up to 880px; module reader with Notes, Problems, Checklist. */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#131313);--ink:light-dark(#141414,#f1f1f1);--mut:light-dark(#5d5d5d,#a9a9a9);--line:light-dark(#e4e4e4,#2d2d2d);--card:light-dark(#f7f7f5,#1b1b1b);--chip:light-dark(#ececea,#262626);--taxi:#f6c400;--taxi-ink:#141414;--ok:light-dark(#18713a,#5cc684);--warn:light-dark(#9a5b00,#f0b25a)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Barlow,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3,.big,.nav a{font-family:"Barlow Condensed",Barlow,sans-serif}
+h1{font-size:clamp(30px,5vw,44px);line-height:1.05;margin:0 0 6px;text-wrap:balance}
+h2{font-size:26px;line-height:1.1;margin:28px 0 10px}
+h3{font-size:20px;margin:18px 0 6px}
+a{color:inherit}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{max-width:880px;margin:0 auto;padding:10px max(4vw,14px);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font:700 20px "Barlow Condensed",sans-serif;letter-spacing:.2px;margin-right:auto}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav a{text-decoration:none;font-size:18px;font-weight:600;padding:8px 12px;border-radius:8px;min-height:44px;display:flex;align-items:center}
+.nav a[aria-current=page]{background:var(--taxi);color:var(--taxi-ink)}
+.checker{height:10px;background:repeating-conic-gradient(var(--taxi-ink) 0 25%,var(--taxi) 0 50%) 0 0/10px 10px}
+#status{font-size:13px;color:var(--mut)}
+main{max-width:880px;margin:0 auto;padding:22px max(4vw,14px) 80px}
+.meter{background:var(--taxi);color:var(--taxi-ink);border-radius:16px;padding:22px clamp(18px,4vw,30px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 20px;align-items:end}
+.meter .big{font-size:clamp(54px,11vw,86px);line-height:.9;font-weight:700;font-variant-numeric:tabular-nums}
+.meter .lvl{font:700 24px "Barlow Condensed",sans-serif}
+.meter .sub{font-size:15px}
+.track{grid-column:1/-1;height:14px;background:rgba(0,0,0,.18);border-radius:8px;overflow:hidden;margin-top:10px}
+.track i{display:block;height:100%;background:var(--taxi-ink);border-radius:8px;transition:width .6s}
+.stats{display:flex;gap:18px;flex-wrap:wrap;font-size:15px;grid-column:1/-1}
+.stats b{font:700 20px "Barlow Condensed",sans-serif}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.fares{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.fare{border:1px solid var(--line);border-left:6px solid var(--taxi);border-radius:12px;padding:12px 14px;background:var(--bg)}
+.fare .k{font-size:13px;color:var(--mut);text-transform:none}
+.fare .t{font:700 22px "Barlow Condensed",sans-serif;line-height:1.15}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.muted{color:var(--mut)}.small{font-size:14px}
+button,.btn{font:600 15px Barlow,sans-serif;min-height:44px;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+button.pri,.btn.pri{background:var(--taxi);color:var(--taxi-ink);border-color:var(--taxi)}
+button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--taxi);outline-offset:2px}
+input,textarea{font:16px Barlow,sans-serif;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 10px}
+input[type=number]{width:84px}textarea{width:100%;min-height:90px}
+.chip{display:inline-block;font-size:13px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--chip)}
+.chip.ok{background:var(--ok);color:var(--bg)}.chip.y{background:var(--taxi);color:var(--taxi-ink)}
+.list{display:grid;gap:8px}
+.mod{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:12px;text-decoration:none}
+.mod .c{font:700 20px "Barlow Condensed",sans-serif}
+.mod.na{opacity:.62}
+.xp{font:700 18px "Barlow Condensed",sans-serif;white-space:nowrap}
+.tabs{display:flex;gap:6px;margin:14px 0;flex-wrap:wrap}
+.prose{font-size:17px;max-width:70ch}
+.prose table{border-collapse:collapse;font-size:15px;margin:10px 0;display:block;overflow-x:auto}
+.prose th,.prose td{border-bottom:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+.prose pre{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto;font-size:14px}
+.prose mjx-container[display=true]{overflow-x:auto;overflow-y:hidden;max-width:100%}
+.prob{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0;background:var(--bg)}
+.prob.done{border-color:var(--ok)}
+.prob .hd{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:4px}
+.reveal{border-left:4px solid var(--taxi);padding:6px 0 6px 14px;margin:10px 0}
+.reveal.sol{border-left-color:var(--ok)}
+.ask{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:12px;margin-top:10px}
+.out{margin-top:10px;font-size:16px}
+details.card summary{cursor:pointer;min-height:32px}
+details.card[open] summary{margin-bottom:8px}
+.wk{display:grid;grid-template-columns:56px 92px minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 10px;border-bottom:1px solid var(--line);font-size:15px}
+.wk.cur{background:var(--taxi);color:var(--taxi-ink);border-radius:10px}
+.wk.boss{font-weight:600}
+.lv{display:grid;grid-template-columns:44px minmax(0,1fr) 90px minmax(0,1.3fr);gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.lv.got .n{background:var(--taxi);color:var(--taxi-ink)}
+.lv .n{font:700 20px "Barlow Condensed",sans-serif;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--chip)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:10px}
+.badge{border:1px solid var(--line);border-radius:12px;padding:12px}
+.badge.got{border-color:var(--taxi);box-shadow:inset 0 0 0 2px var(--taxi)}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;opacity:0;transition:.3s;pointer-events:none;z-index:9}
+#toast.show{opacity:1;transform:translateX(-50%)}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:grid;place-items:center;z-index:10;padding:16px}
+#modal[hidden]{display:none}
+.lvup{background:var(--taxi);color:var(--taxi-ink);border-radius:18px;padding:28px;max-width:420px;text-align:center;animation:pop .5s}
+.lvup .big{font-size:64px;font-weight:700;line-height:1}
+@keyframes pop{from{transform:scale(.8);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:600px){.wk{grid-template-columns:44px minmax(0,1fr)}.wk>*:not(:first-child){grid-column:2}.lv{grid-template-columns:40px minmax(0,1fr)}.lv>*:not(:first-child){grid-column:2}.meter{grid-template-columns:1fr}.meter .sub{text-align:left!important}}
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']],processEscapes:true},svg:{fontCache:'global'},startup:{typeset:false,ready(){MathJax.startup.defaultReady();window.__mjReady=true;var q=window.__mjQ||[];window.__mjQ=[];q.forEach(function(el){MathJax.typesetPromise([el]).catch(function(){});});}}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" async></script>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="brand">Probability Study Quest</div>
+    <nav class="nav" aria-label="Sections">
+      <a href="#today">Today</a><a href="#modules">Modules</a><a href="#schedule">Schedule</a><a href="#rewards">Rewards</a>
+    </nav>
+    <span id="status">Loading…</span>
+  </div>
+  <div class="checker" aria-hidden="true"></div>
+</header>
+<main id="app"><p class="muted">Loading your plan…</p></main>
+<footer class="small muted" style="max-width:880px;margin:0 auto;padding:0 max(4vw,14px) 40px">
+  <a href="https://varun-1411.github.io/probability-study-quest/">Website version</a> ·
+  <a href="https://claude.ai/artifact/646yyG8GEYHXpB4VCX5fKS">Claude version (Ask Claude, sync)</a> ·
+  <a href="https://github.com/varun-1411/probability-study-quest">Source on GitHub</a>
+</footer>
+<div id="modal" hidden></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+{
+const $ = (s, el = document) => el.querySelector(s);
+const app = $('#app');
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const DAY = 864e5;
+const PHASES = ['Foundations','Probability','Statistics','Stochastic processes','MDPs','Reinforcement learning','Game theory'];
+let PLAN = null, S = blank(), db = null, ref = null, sample = null, downloads = null, unsub = null, pendingRestore = null, standalone = false;
+const LINKS = { claude: 'https://claude.ai/artifact/646yyG8GEYHXpB4VCX5fKS', site: 'https://varun-1411.github.io/probability-study-quest/', repo: 'https://github.com/varun-1411/probability-study-quest' };
+const MOD = {};
+let modTab = 'notes', saveTimer = null, saving = false, dirty = false, lastSaved = '';
+
+function blank() { return { weeks: {}, mods: {}, badges: {}, taxi: {}, rewards: {}, doubts: {}, requests: {}, lastLevel: 1 }; }
+function typeset(el) {
+  if (!el) return;
+  if (window.__mjReady && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([el]).catch(() => {});
+  else (window.__mjQ = window.__mjQ || []).push(el);
+}
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2200); }
+function setStatus(msg) { $('#status').textContent = msg; }
+function dateOf(iso) { const [y, m, d] = iso.split('-').map(Number); return new Date(y, m - 1, d); }
+function fmt(iso, opt) { return dateOf(iso).toLocaleDateString('en-GB', opt || { day: 'numeric', month: 'short', year: 'numeric' }); }
+function num(n) { return Number(n).toLocaleString('en-IN'); }
+function curWeek() { const n = Math.floor((Date.now() - dateOf(PLAN.weeks[0].date).getTime()) / (7 * DAY)); return Math.max(0, Math.min(PLAN.weeks.length - 1, n)); }
+function codeOf(txt) { const m = /^(\d\.\d)/.exec(txt || ''); return m ? m[1] : null; }
+function modInfo(code) { return PLAN.modules.find(m => m.code === code); }
+function mstate(code) { return S.mods[code] || (S.mods[code] = { ps: false, code: false, teach: false, exit: null, solved: {} }); }
+function wstate(n) { return S.weeks[n] || (S.weeks[n] = { done: false, hours: 0 }); }
+function hashOf(code) { return '#m-' + code.replace('.', '-'); }
+
+/* ---------- XP, levels, streaks ---------- */
+function modXP(m) { if (!m) return 0; const e = Number(m.exit); return (m.ps ? 100 : 0) + (m.code ? 50 : 0) + (m.teach ? 100 : 0) + (e >= 70 ? 150 : 0) + (e >= 85 ? 50 : 0); }
+function streaks() {
+  const cur = curWeek(); let run = 0, best = 0;
+  for (const w of PLAN.weeks) {
+    if (w.n === 0) continue; if (w.n > cur) break;
+    const h = (S.weeks[w.n] || {}).hours || 0;
+    if (h >= 10) { run++; best = Math.max(best, run); } else if (w.n < cur) run = 0;
+  }
+  return { best, current: run };
+}
+function badgeEarned(b) {
+  const [id, , , , kind] = b;
+  if (kind === 'manual') return !!S.badges[id];
+  const st = streaks().best;
+  if (id === 'streak-4') return st >= 4;
+  if (id === 'streak-12') return st >= 12;
+  if (id === 'streak-26') return st >= 26;
+  if (id === 'taxi-architect') return PLAN.taxi.every((_, i) => S.taxi[i]);
+  return false;
+}
+function totalXP() {
+  let t = 0;
+  for (const w of PLAN.weeks) {
+    const s = S.weeks[w.n]; if (!s) continue;
+    if (w.diag) { if (s.done) t += 100; continue; }
+    if ((s.hours || 0) >= 10) t += 20;
+    if (w.boss && s.done) t += 300;
+  }
+  for (const code in S.mods) t += modXP(S.mods[code]);
+  t += 150 * PLAN.taxi.filter((_, i) => S.taxi[i]).length;
+  for (const b of PLAN.badges) if (badgeEarned(b)) t += b[3];
+  return t;
+}
+function levelOf(x) { let L = PLAN.levels[0]; for (const l of PLAN.levels) if (x >= l[2]) L = l; return L; }
+function nextLevel(x) { return PLAN.levels.find(l => l[2] > x) || null; }
+function rewardOf(l) { return (S.rewards && S.rewards[l[0]]) || l[3]; }
+function checkLevel() {
+  const L = levelOf(totalXP())[0];
+  if (L > (S.lastLevel || 1)) { S.lastLevel = L; showLevelUp(PLAN.levels[L - 1]); }
+  else if (L < (S.lastLevel || 1)) S.lastLevel = L;
+}
+function showLevelUp(l) {
+  const m = $('#modal');
+  m.innerHTML = `<div class="lvup" role="dialog" aria-modal="true" aria-label="Level up"><div class="small">Level up</div><div class="big">${l[0]}</div><h2 style="margin:6px 0">${esc(l[1])}</h2><p>Your reward: <b>${esc(rewardOf(l))}</b></p><p class="small">Claim it this week, while effort and payoff are still linked.</p><button class="on" data-act="close-modal">Claimed</button></div>`;
+  m.hidden = false; $('button', m).focus();
+}
+
+/* ---------- saving ---------- */
+function changed(full = true) {
+  dirty = true; checkLevel();
+  clearTimeout(saveTimer); saveTimer = setTimeout(flush, 700);
+  if (full) render(); else refreshMeterBits();
+}
+async function flush() {
+  if (!dirty) return;
+  if (saving) { saveTimer = setTimeout(flush, 500); return; }
+  dirty = false; const body = JSON.parse(JSON.stringify(S)); lastSaved = JSON.stringify(body);
+  try { localStorage.setItem('psq-progress', lastSaved); } catch (e) {}
+  if (!ref) { setStatus('Saved in this browser only'); return; }
+  saving = true; setStatus('Saving…');
+  try { await ref.set(body); setStatus('Saved to your account'); }
+  catch (e) {
+    if (e && e.code === 'unavailable') { dirty = true; saveTimer = setTimeout(flush, 3000); setStatus('Not saved yet, retrying'); }
+    else if (e && e.code === 'invalid_argument') { ref = null; setStatus('Saved in this browser only'); }
+    else setStatus('Could not save: ' + (e && e.message ? e.message : 'unknown error'));
+  }
+  saving = false;
+}
+
+/* ---------- views ---------- */
+function meterHTML() {
+  const x = totalXP(), L = levelOf(x), N = nextLevel(x), st = streaks();
+  const pct = N ? Math.round(100 * (x - L[2]) / (N[2] - L[2])) : 100;
+  const done = PLAN.weeks.filter(w => (S.weeks[w.n] || {}).done).length;
+  return `<section class="meter" aria-label="Your progress">
+    <div><div class="lvl">Level ${L[0]} · ${esc(L[1])}</div><div class="big" id="xpnum">${num(x)}</div><div class="sub">XP earned</div></div>
+    <div class="sub" style="text-align:right">${N ? `<b>${num(N[2] - x)} XP</b> to Level ${N[0]} · ${esc(N[1])}<br>Unlocks: ${esc(rewardOf(N))}` : 'Every level unlocked'}</div>
+    <div class="track" aria-hidden="true"><i style="width:${pct}%"></i></div>
+    <div class="stats"><span><b>${st.current}</b> week streak</span><span><b>${st.best}</b> best streak</span><span><b>${done}</b> of ${PLAN.weeks.length} weeks done</span></div>
+  </section>`;
+}
+function refreshMeterBits() { const m = $('.meter'); if (m) m.outerHTML = meterHTML(); }
+
+function fareHTML(label, txt) {
+  const code = codeOf(txt), mi = code && modInfo(code);
+  const part = (/\((\d+\/\d+)\)\s*$/.exec(txt || '') || [])[1];
+  const name = mi ? mi.name : txt;
+  let action = '';
+  if (mi && mi.available) action = `<a class="btn pri" href="${hashOf(code)}">Open ${esc(code)}</a>`;
+  else if (mi) action = `<span class="small muted">Notes and problem set arrive before this week starts.</span>`;
+  return `<div class="fare"><div class="k">${esc(label)}${part ? ' · week ' + esc(part) : ''}</div><div class="t">${code ? esc(code) + ' ' : ''}${esc(name)}</div><div class="row" style="margin-top:8px">${action}</div></div>`;
+}
+function viewToday() {
+  const n = curWeek(), w = PLAN.weeks[n], ws = wstate(n);
+  const endD = new Date(dateOf(w.date).getTime() + 6 * DAY);
+  let body = '';
+  if (w.diag) {
+    body = `<div class="card"><h2 style="margin-top:0">Week 0 · placement diagnostic</h2><p>One 60-minute closed-book block per phase. Send your answers to Claude in the project chat for grading; your plan moves to match.</p>
+      <div class="row"><a class="btn pri" href="#m-diag">Open the diagnostic</a><button class="${ws.done ? 'on' : ''}" data-act="week-done" data-n="0">${ws.done ? 'Sent for grading ✓' : 'Mark as sent (+100 XP)'}</button></div></div>`;
+  } else if (w.boss) {
+    body = `<div class="card"><h2 style="margin-top:0">Boss week</h2><p>No new material. Review this block, take its exit checks, catch up on anything behind, then claim your reward.</p>
+      <div class="row"><button class="${ws.done ? 'on' : ''}" data-act="week-done" data-n="${n}">${ws.done ? 'Boss cleared ✓' : 'Boss cleared: all exit checks passed (+300 XP)'}</button></div></div>`;
+  } else {
+    body = `<div class="fares">${fareHTML('Theory track · 6 h', w.theory)}${fareHTML('Modeling track · 6 h', w.model)}</div>`;
+  }
+  const next = PLAN.weeks.slice(n + 1, n + 4).map(x => `<div class="wk ${x.boss ? 'boss' : ''}"><span>W${x.n}</span><span class="d">${fmt(x.date, { day: 'numeric', month: 'short' })}</span><span>${esc(x.theory)}</span><span class="m2">${esc(x.model)}</span><span></span></div>`).join('');
+  const banner = standalone ? `<div class="card small"><b>Website version.</b> Progress is saved in this browser only; use <a href="#rewards">Download backup</a> to move it between devices. <a href="${LINKS.claude}">The Claude version</a> adds Ask Claude and syncs across devices.</div>` : '';
+  app.innerHTML = `${banner}${meterHTML()}
+    <h1 style="margin-top:22px">Week ${w.n} · ${fmt(w.date, { day: 'numeric', month: 'short' })} to ${endD.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</h1>
+    ${body}
+    <div class="card"><div class="row"><label for="hrs"><b>Hours this week</b></label>
+      <button data-act="hrs" data-n="${n}" data-d="-1" aria-label="One hour less">−</button>
+      <input id="hrs" type="number" min="0" max="80" step="0.5" value="${ws.hours || 0}" data-act="hrs-set" data-n="${n}">
+      <button data-act="hrs" data-n="${n}" data-d="1" aria-label="One hour more">+</button>
+      <span class="small muted">10+ hours keeps your streak and earns 20 XP.</span></div>
+      ${!w.diag && !w.boss ? `<div class="row" style="margin-top:10px"><button class="${ws.done ? 'on' : ''}" data-act="week-done" data-n="${n}">${ws.done ? 'Week done ✓' : 'Mark week done'}</button></div>` : ''}
+    </div>
+    <h2>Coming up</h2><div>${next || '<p class="muted">That was the final week.</p>'}</div>`;
+}
+
+function viewModules() {
+  const dg = (S.weeks[0] || {}).done;
+  let html = `<h1>Modules</h1><p class="muted">Every module can be previewed now: topics, books, prerequisites and why it matters for your research. Study them in any order; XP counts the same. Modules you request are written first.</p>
+    <div class="list"><a class="mod" href="#m-diag"><span class="c">W0</span><span><b>Placement diagnostic</b><br><span class="small muted">28 problems, one 60-minute block per phase</span> ${dg ? '<span class="chip ok">Sent</span>' : ''}</span><span class="xp">${dg ? '100 XP' : 'Open'}</span></a></div>`;
+  PHASES.forEach((ph, i) => {
+    const mods = PLAN.modules.filter(m => m.code[0] === String(i));
+    html += `<h2>Phase ${i} · ${ph}</h2><div class="list">` + mods.map(m => {
+      const s = S.mods[m.code], x = modXP(s);
+      const chips = s ? [s.ps && 'Problem set', s.code && 'Code lab', s.teach && 'Teach-back', s.exit != null && s.exit !== '' && `Exit ${s.exit}%`].filter(Boolean).map(c => `<span class="chip ok">${esc(c)}</span>`).join(' ') : '';
+      const meta = m.finish ? `Planned finish ${fmt(m.finish)}` : 'Optional module';
+      const req = (S.requests || {})[m.code] ? ' <span class="chip">Requested</span>' : '';
+      const inner = `<span class="c">${m.code}</span><span><b>${esc(m.name)}</b> ${m.core ? '<span class="chip y">Research core</span>' : ''}${req}<br><span class="small muted">${meta} · ${m.track}</span> ${chips}</span><span class="xp">${x ? x + ' XP' : (m.available ? 'Open' : 'Preview')}</span>`;
+      return `<a class="mod ${m.available ? '' : 'na'}" href="${hashOf(m.code)}">${inner}</a>`;
+    }).join('') + `</div>`;
+  });
+  app.innerHTML = html;
+}
+
+async function loadModule(code) {
+  if (MOD[code]) return MOD[code];
+  const r = await fetch('modules/' + code + '.json'); if (!r.ok) throw new Error('missing');
+  return (MOD[code] = await r.json());
+}
+async function viewModule(code) {
+  app.innerHTML = '<p class="muted">Loading module…</p>';
+  let M;
+  try { M = await loadModule(code); } catch (e) { viewPreview(code); return; }
+  const isDiag = code === 'diag', s = mstate(code), solved = s.solved || (s.solved = {});
+  const nSolved = M.problems.filter(p => solved[p.id]).length;
+  const tabs = ['notes', 'problems', 'checklist'].map(t => `<button class="${modTab === t ? 'on' : ''}" data-act="tab" data-t="${t}">${t === 'notes' ? (isDiag ? 'How to take it' : 'Notes') : t === 'problems' ? `Problems (${nSolved}/${M.problems.length})` : 'Checklist'}</button>`).join('');
+  let body = '';
+  if (modTab === 'notes') {
+    const saved = ((S.doubts || {})[code] || []).slice().reverse();
+    const box = sample
+      ? `<textarea id="dq" placeholder="Ask anything about this module: a step you do not follow, an example, or a suspected error in the notes"></textarea>
+         <div class="row" style="margin-top:8px"><button class="pri" data-act="doubt">Ask Claude</button><span class="small muted">Answers are saved below, and Claude in the project chat can read them too.</span></div>
+         <div class="out prose" aria-live="polite"></div>`
+      : `<p class="small">Ask Claude works in <a href="${LINKS.claude}">the Claude version of this app</a>. You can also ask in the project chat, starting with the module number.</p>`;
+    body = `<div id="mbody"><article class="prose">${M.notesHtml}</article>
+      <section class="ask" id="doubt" style="margin-top:28px"><h2 style="margin-top:0">Have a doubt?</h2>${box}
+      <p class="small muted" style="margin-bottom:0">For long or open-ended questions, ask in the project chat with the module number.</p></section>
+      <div id="doubtlist">${saved.length ? '<h3>Your saved doubts</h3>' : ''}${saved.map(d => doubtHTML(d)).join('')}</div></div>`;
+  }
+  else if (modTab === 'problems') {
+    body = `<div id="mbody">` + M.problems.map(p => `
+      <section class="prob ${solved[p.id] ? 'done' : ''}" data-pid="${esc(p.id)}">
+        <div class="hd"><span class="chip y">${esc(p.id)}</span><span class="chip">${esc(p.tier)}</span></div>
+        <div class="prose">${p.promptHtml}</div>
+        <div class="row">
+          ${p.hintHtml ? `<button data-act="reveal" data-k="hint">Hint</button>` : ''}
+          ${p.solutionHtml ? `<button data-act="reveal" data-k="sol">Solution</button>` : ''}
+          <button class="${solved[p.id] ? 'on' : ''}" data-act="solve">${solved[p.id] ? (isDiag ? 'Attempted ✓' : 'Solved ✓') : (isDiag ? 'Mark attempted' : 'Mark solved')}</button>
+          ${sample ? `<button data-act="ask-open">Ask Claude</button>` : ''}
+        </div>
+        ${p.hintHtml ? `<div class="reveal prose" data-k="hint" hidden>${p.hintHtml}</div>` : ''}
+        ${p.solutionHtml ? `<div class="reveal sol prose" data-k="sol" hidden>${p.solutionHtml}</div>` : ''}
+        <div class="ask" hidden><label class="small" for="att-${esc(p.id)}">Your attempt (optional for a hint, needed for a check)</label>
+          <textarea id="att-${esc(p.id)}" placeholder="Type your working; LaTeX like \\(x^2\\) is fine"></textarea>
+          <div class="row" style="margin-top:8px"><button data-act="ask" data-mode="hint">Give me a hint</button><button data-act="ask" data-mode="check">Check my attempt</button><button data-act="ask" data-mode="explain">Explain the idea</button></div>
+          <div class="out prose" aria-live="polite"></div></div>
+      </section>`).join('') + `</div>`;
+  } else {
+    if (isDiag) {
+      const ws = wstate(0);
+      body = `<div class="card"><p>Send your answers to Claude in the project chat. Once they are graded, your plan is updated.</p><button class="${ws.done ? 'on' : ''}" data-act="week-done" data-n="0">${ws.done ? 'Sent for grading ✓' : 'Mark as sent (+100 XP)'}</button></div>`;
+    } else {
+      const item = (k, label, xp) => `<div class="row" style="margin:8px 0"><button class="${s[k] ? 'on' : ''}" data-act="mod-flag" data-k="${k}">${s[k] ? '✓ ' : ''}${label}</button><span class="small muted">+${xp} XP</span></div>`;
+      body = `<div class="card">${item('ps', 'Problem set finished, every tier attempted', 100)}${item('code', 'Code lab done', 50)}${item('teach', 'Teach-back: explained it in 5 minutes', 100)}
+        <div class="row" style="margin:8px 0"><label for="exit"><b>Exit check score (%)</b></label><input id="exit" type="number" min="0" max="100" value="${s.exit == null ? '' : s.exit}" data-act="exit"><span class="small muted">70%+ earns 150 XP, 85%+ another 50</span></div>
+        <p class="xp">This module: ${modXP(s)} XP</p>
+        <p class="small muted">Exit check: 3 hours, closed book, unseen problems. Ask Claude in the project chat for this module's exit check when you are ready.</p></div>`;
+    }
+  }
+  app.innerHTML = `<p class="small"><a href="#modules">← All modules</a></p>
+    <h1>${isDiag ? '' : 'Module ' + esc(M.id) + ': '}${esc(M.title)}</h1>
+    <p class="muted small">${esc(M.track)} track · ${esc(M.weeks)}</p>
+    <div class="tabs">${tabs}</div>${body}`;
+  typeset($('#mbody'));
+}
+
+function viewPreview(code) {
+  const m = modInfo(code);
+  if (!m) { app.innerHTML = `<h1>Module ${esc(code)}</h1><p>No such module. <a href="#modules">Back to modules</a></p>`; return; }
+  const o = m.outline || {}, req = (S.requests || {})[code];
+  const needs = (o.needs || []).length ? o.needs.map(c => { const n = modInfo(c); return `<a href="${hashOf(c)}">${c} ${n ? esc(n.name) : ''}</a>`; }).join(', ') : 'Nothing beyond what you already know';
+  app.innerHTML = `<p class="small"><a href="#modules">← All modules</a></p>
+    <h1>Module ${esc(code)}: ${esc(m.name)}</h1>
+    <p class="muted small">${esc(m.track)} track · ${m.finish ? 'planned finish ' + fmt(m.finish) : 'optional module'} ${m.core ? ' · <span class="chip y">Research core</span>' : ''}</p>
+    <div class="card"><b>Notes and problem set not written yet.</b> Need it sooner than planned? Request it and it is written next; for today, also ask in the project chat.
+      <div class="row" style="margin-top:10px"><button class="${req ? 'on' : 'pri'}" data-act="request" data-code="${esc(code)}">${req ? 'Requested ✓ (tap to cancel)' : 'Write this one next'}</button></div></div>
+    <h2>What you will learn</h2><p class="prose">${esc(o.topics || '')}</p>
+    <h2>Why it matters for your research</h2><p class="prose">${esc(o.why || '')}</p>
+    <h2>Study first</h2><p class="prose">${needs}</p>
+    <h2>Main reading</h2><p class="prose">${esc(o.read || '')}</p>
+    <h2>Extra problems</h2><p class="prose">${esc(o.problems || '')}</p>`;
+}
+
+function viewSchedule() {
+  const cur = curWeek();
+  const rows = PLAN.weeks.map(w => {
+    const s = S.weeks[w.n] || {};
+    return `<div class="wk ${w.boss ? 'boss' : ''} ${w.n === cur ? 'cur' : ''}" ${w.n === cur ? 'id="curwk"' : ''}>
+      <span>W${w.n}</span><span class="d">${fmt(w.date, { day: 'numeric', month: 'short', year: '2-digit' })}</span>
+      <span>${esc(w.theory)}</span><span class="m2">${esc(w.model)}</span>
+      <span class="small" style="text-align:right">${s.done ? '✓' : ''}${s.hours ? ' ' + s.hours + ' h' : ''}</span></div>`;
+  }).join('');
+  app.innerHTML = `<h1>Schedule</h1><p class="muted">Two tracks, 6 hours each a week, ${fmt(PLAN.weeks[1].date)} to ${fmt(PLAN.weeks[PLAN.weeks.length - 1].date)}. A boss week follows every 12 study weeks, plus a final one. Log hours on Today.</p>
+    <div class="row" style="margin:6px 0 10px"><button data-act="to-cur">Jump to this week</button></div><div>${rows}</div>`;
+}
+
+function viewRewards() {
+  const x = totalXP();
+  const lv = PLAN.levels.map(l => `<div class="lv ${x >= l[2] ? 'got' : ''}"><span class="n">${l[0]}</span><span><b>${esc(l[1])}</b></span><span class="x small">${num(l[2])} XP</span>
+    <span class="r"><input aria-label="Reward for level ${l[0]}" data-act="reward" data-l="${l[0]}" value="${esc(rewardOf(l))}" style="width:100%"></span></div>`).join('');
+  const bd = PLAN.badges.map(b => { const got = badgeEarned(b);
+    return `<div class="badge ${got ? 'got' : ''}"><b>${esc(b[1])}</b> <span class="chip">${b[3]} XP</span><p class="small muted" style="margin:6px 0">${esc(b[2])}</p>
+      ${b[4] === 'manual' ? `<button class="${got ? 'on' : ''}" data-act="badge" data-id="${b[0]}">${got ? 'Earned ✓' : 'Mark earned'}</button>` : `<span class="small">${got ? 'Earned ✓' : 'Earned automatically'}</span>`}</div>`; }).join('');
+  const tx = PLAN.taxi.map((t, i) => `<div class="row" style="margin:6px 0"><button class="${S.taxi[i] ? 'on' : ''}" data-act="taxi" data-i="${i}" aria-label="Phase ${i} taxi step">${S.taxi[i] ? '✓' : 'Phase ' + i}</button><span>${esc(t)}</span></div>`).join('');
+  app.innerHTML = `${meterHTML()}<h1 style="margin-top:22px">Rewards</h1>
+    <h2>Levels</h2><p class="small muted">Edit any reward so it is something you really want; changes save automatically.</p>${lv}
+    <h2>Badges</h2><div class="badges">${bd}</div>
+    <h2>Taxi thread</h2><p class="small muted">One step per phase, 150 XP each.</p>${tx}
+    <h2>How XP works</h2><p class="small">Diagnostic sent 100 · problem set 100 · code lab 50 · exit check 70%+ 150 (85%+ another 50) · teach-back 100 · taxi step 150 · week with 10+ hours 20 · boss week cleared 300 · badges as listed.</p>
+    <h2>Back up your progress</h2>
+    <div class="card"><p style="margin-top:0">Your progress is saved to this Claude account. Keep a backup file too: if you ever move to a new account, open your copy of this app there and restore the file.</p>
+      <div class="row">${downloads || standalone ? '<button class="pri" data-act="backup-dl">Download backup</button>' : ''}<button data-act="backup-copy">Copy backup</button>
+      <label class="btn" for="restore">Restore from file</label><input id="restore" type="file" accept=".json,application/json" data-act="restore" style="position:absolute;opacity:0;width:1px;height:1px"></div>
+      <div id="restore-msg" class="small" style="margin-top:8px"></div></div>`;
+}
+
+function render() {
+  if (!PLAN) return;
+  const h = location.hash.slice(1) || 'today';
+  document.querySelectorAll('.nav a').forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + (h.startsWith('m-') ? 'modules' : h) ? 'page' : 'false'));
+  if (h.startsWith('m-')) return viewModule(h.slice(2).replace('-', '.'));
+  if (h === 'modules') return viewModules();
+  if (h === 'schedule') return viewSchedule();
+  if (h === 'rewards') return viewRewards();
+  return viewToday();
+}
+
+/* ---------- backup ---------- */
+function backupText() { return JSON.stringify({ app: 'probability-study-quest', saved: new Date().toISOString(), progress: S }, null, 1); }
+async function backupDownload() {
+  const name = 'study-quest-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+  if (!downloads) {
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([backupText()], { type: 'application/json' }));
+    a.download = name; document.body.appendChild(a); a.click(); a.remove(); toast('Backup downloaded'); return;
+  }
+  try { await downloads.save({ filename: name, data: backupText() }); toast('Backup saved'); }
+  catch (e) { $('#restore-msg').textContent = 'The download did not go through. Use Copy backup and paste it into a file instead.'; }
+}
+async function backupCopy() {
+  try { await navigator.clipboard.writeText(backupText()); toast('Backup copied to clipboard'); }
+  catch (e) { $('#restore-msg').textContent = 'Copying is blocked here. Use Download backup instead.'; }
+}
+function restoreFrom(text) {
+  const msg = $('#restore-msg');
+  let data; try { data = JSON.parse(text); } catch (e) { msg.textContent = 'That file is not a Study Quest backup.'; return; }
+  const p = data && (data.progress || data);
+  if (!p || typeof p !== 'object' || !p.weeks || !p.mods) { msg.textContent = 'That file is not a Study Quest backup.'; return; }
+  const cur = S, nowXP = totalXP(); S = Object.assign(blank(), JSON.parse(JSON.stringify(p))); const newXP = totalXP(); S = cur;
+  pendingRestore = p;
+  msg.innerHTML = `Replace your current progress (${num(nowXP)} XP) with this backup (${num(newXP)} XP)? <button class="pri" data-act="restore-yes">Replace</button> <button data-act="restore-no">Cancel</button>`;
+}
+
+/* ---------- Ask Claude ---------- */
+function md(t) {
+  const keep = [];
+  const src = String(t || '').replace(/\\\[[\s\S]*?\\\]|\$\$[\s\S]*?\$\$|\\\([\s\S]*?\\\)/g, m => { keep.push(m); return '@@M' + (keep.length - 1) + '@@'; });
+  const blocks = esc(src).split(/\n{2,}/);
+  const html = blocks.map(b => {
+    const inl = s => s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/`([^`]+)`/g, '<code>$1</code>');
+    if (/^\s*[-*] /.test(b)) return '<ul>' + b.split(/\n/).filter(Boolean).map(li => '<li>' + inl(li.replace(/^\s*[-*] /, '')) + '</li>').join('') + '</ul>';
+    if (/^\s*\d+\. /.test(b)) return '<ol>' + b.split(/\n/).filter(Boolean).map(li => '<li>' + inl(li.replace(/^\s*\d+\. /, '')) + '</li>').join('') + '</ol>';
+    return '<p>' + inl(b).replace(/\n/g, '<br>') + '</p>';
+  }).join('');
+  return html.replace(/@@M(\d+)@@/g, (_, i) => esc(keep[+i]));
+}
+function doubtHTML(d) {
+  const when = new Date(d.t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  return `<details class="card"><summary><b>${esc(d.q)}</b> <span class="small muted">${when}</span></summary><div class="prose">${md(d.a)}</div></details>`;
+}
+async function askDoubt() {
+  const code = location.hash.slice(3).replace('-', '.'), M = MOD[code];
+  const q = ($('#dq').value || '').trim(), out = $('#doubt .out'), btn = $('[data-act=doubt]');
+  if (!M || !q) { out.innerHTML = '<p>Type your question first.</p>'; return; }
+  const prompt = `You are a patient, rigorous tutor. The student is a PhD student in transportation operations research learning measure-theoretic probability. They are reading Module ${M.id}: ${M.title}. The module notes are below.
+
+Answer the student's question. Start in plain words with intuition, then give the precise mathematics. If the question points to a real error or gap in the notes, say so plainly and give the correction. If the question goes beyond the notes, answer it anyway and say which later module covers it. Use LaTeX with \\( \\) for inline and \\[ \\] for display math. Keep it under 300 words.
+
+Question: ${q}
+
+MODULE NOTES:
+${M.notesSrc || ''}`;
+  btn.disabled = true; out.textContent = 'Thinking…';
+  try {
+    const r = await sample(prompt, { onText: ({ text }) => { out.textContent = text; } });
+    out.innerHTML = md(r.text); typeset(out);
+    const list = (S.doubts[code] = S.doubts[code] || []);
+    const d = { q, a: r.text, t: Date.now() }; list.push(d); if (list.length > 30) list.shift();
+    const dl = $('#doubtlist');
+    if (dl) { if (!dl.querySelector('h3')) dl.insertAdjacentHTML('afterbegin', '<h3>Your saved doubts</h3>'); dl.querySelector('h3').insertAdjacentHTML('afterend', doubtHTML(d)); typeset(dl); }
+    $('#dq').value = ''; changed(false);
+  } catch (e) {
+    out.innerHTML = e && e.code === 'rate_limited' ? '<p>Claude is busy right now. Try again in a minute.</p>' : '<p>That did not work. Try again in a moment, or ask in the project chat.</p>';
+  }
+  btn.disabled = false;
+}
+const MODES = {
+  hint: 'Give exactly one hint that unblocks the next step. Do not give the full solution or the final answer.',
+  check: 'Evaluate the attempt. Say briefly what is correct, then point to the first error or gap and explain why it fails. Do not write out the full solution; end with one question that helps the student fix it.',
+  explain: 'Explain the key idea behind this problem in plain words, with an airport taxi-stand example where it fits naturally, then state precisely the definition or theorem it rests on. Do not solve the problem.'
+};
+async function askClaude(card, mode) {
+  const code = location.hash.slice(3).replace('-', '.'), M = MOD[code];
+  const p = M && M.problems.find(q => q.id === card.dataset.pid); if (!p) return;
+  const attempt = $('textarea', card).value.trim(), out = $('.out', card);
+  if (mode === 'check' && !attempt) { out.innerHTML = '<p>Type your attempt above first, then ask for a check.</p>'; return; }
+  const prompt = `You are a patient, rigorous tutor. The student is a PhD student in transportation operations research learning measure-theoretic probability, working through Module ${M.id}: ${M.title}.
+
+Problem ${p.id} (${p.tier}):
+${p.promptSrc}
+${attempt ? `\nStudent's attempt:\n${attempt}\n` : ''}
+Task: ${MODES[mode]}
+Write plain language first, then precise mathematics. Use LaTeX with \\( \\) for inline math and \\[ \\] for display math. Keep it under 220 words.`;
+  card.querySelectorAll('[data-act=ask]').forEach(b => b.disabled = true);
+  out.textContent = 'Thinking…';
+  try {
+    const r = await sample(prompt, { onText: ({ text }) => { out.textContent = text; } });
+    out.innerHTML = md(r.text) + (r.truncated ? '<p class="small muted">(cut short)</p>' : '');
+    typeset(out);
+  } catch (e) {
+    out.innerHTML = e && e.code === 'rate_limited' ? '<p>Claude is busy right now. Try again in a minute.</p>' : e && e.code === 'not_granted' ? '<p>Ask Claude is not available in this view.</p>' : '<p>That did not work. Try again in a moment.</p>';
+  }
+  card.querySelectorAll('[data-act=ask]').forEach(b => b.disabled = false);
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b || b.tagName === 'INPUT') return;
+  const act = b.dataset.act, card = b.closest('.prob');
+  if (act === 'close-modal') { $('#modal').hidden = true; return; }
+  if (act === 'tab') { modTab = b.dataset.t; render(); window.scrollTo(0, 0); return; }
+  if (act === 'to-cur') { const c = $('#curwk'); if (c) c.scrollIntoView({ block: 'center' }); return; }
+  if (act === 'reveal') { const r = $(`.reveal[data-k="${b.dataset.k}"]`, card); r.hidden = !r.hidden; b.classList.toggle('on', !r.hidden); return; }
+  if (act === 'ask-open') { const a = $('.ask', card); a.hidden = !a.hidden; b.classList.toggle('on', !a.hidden); return; }
+  if (act === 'ask') { askClaude(card, b.dataset.mode); return; }
+  if (act === 'doubt') { askDoubt(); return; }
+  if (act === 'request') { const c = b.dataset.code; S.requests = S.requests || {}; if (S.requests[c]) delete S.requests[c]; else { S.requests[c] = Date.now(); toast('Requested: ' + c + ' gets written next'); } changed(); return; }
+  if (act === 'backup-dl') { backupDownload(); return; }
+  if (act === 'backup-copy') { backupCopy(); return; }
+  if (act === 'restore-yes') { if (pendingRestore) { adopt(pendingRestore); pendingRestore = null; toast('Progress restored'); changed(); } return; }
+  if (act === 'restore-no') { pendingRestore = null; $('#restore-msg').textContent = ''; return; }
+  if (act === 'solve') {
+    const code = location.hash.slice(3).replace('-', '.'), s = mstate(code), pid = card.dataset.pid, M = MOD[code];
+    s.solved[pid] = !s.solved[pid]; if (!s.solved[pid]) delete s.solved[pid];
+    card.classList.toggle('done', !!s.solved[pid]); b.classList.toggle('on', !!s.solved[pid]);
+    const isDiag = code === 'diag';
+    b.textContent = s.solved[pid] ? (isDiag ? 'Attempted ✓' : 'Solved ✓') : (isDiag ? 'Mark attempted' : 'Mark solved');
+    const n = M.problems.filter(p => s.solved[p.id]).length;
+    const tb = $('[data-t=problems]'); if (tb) tb.textContent = `Problems (${n}/${M.problems.length})`;
+    if (!isDiag && n === M.problems.length && !s.ps) { s.ps = true; toast('+100 XP · problem set finished'); }
+    changed(false); return;
+  }
+  if (act === 'mod-flag') { const code = location.hash.slice(3).replace('-', '.'), s = mstate(code), k = b.dataset.k; s[k] = !s[k]; if (s[k]) toast('+' + ({ ps: 100, code: 50, teach: 100 })[k] + ' XP'); changed(); return; }
+  if (act === 'week-done') { const n = +b.dataset.n, w = PLAN.weeks[n], ws = wstate(n); ws.done = !ws.done; if (ws.done) toast(w.diag ? '+100 XP · diagnostic sent' : w.boss ? '+300 XP · boss cleared' : 'Week marked done'); changed(); return; }
+  if (act === 'hrs') { const ws = wstate(+b.dataset.n); const before = ws.hours || 0; ws.hours = Math.max(0, before + Number(b.dataset.d)); if (before < 10 && ws.hours >= 10) toast('+20 XP · 10-hour week'); changed(); return; }
+  if (act === 'badge') { S.badges[b.dataset.id] = !S.badges[b.dataset.id]; changed(); return; }
+  if (act === 'taxi') { const i = b.dataset.i; S.taxi[i] = !S.taxi[i]; if (S.taxi[i]) toast('+150 XP · taxi step'); changed(); return; }
+});
+document.addEventListener('change', e => {
+  const el = e.target, act = el.dataset && el.dataset.act; if (!act) return;
+  if (act === 'hrs-set') { const ws = wstate(+el.dataset.n); ws.hours = Math.max(0, Number(el.value) || 0); changed(); }
+  if (act === 'exit') { const code = location.hash.slice(3).replace('-', '.'), s = mstate(code); s.exit = el.value === '' ? null : Math.max(0, Math.min(100, Number(el.value))); changed(); }
+  if (act === 'restore') { const f = el.files && el.files[0]; if (f) f.text().then(restoreFrom); el.value = ''; return; }
+  if (act === 'reward') { S.rewards[el.dataset.l] = el.value.trim() || PLAN.levels[el.dataset.l - 1][3]; changed(false); }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#modal').hidden) $('#modal').hidden = true; });
+window.addEventListener('hashchange', () => { modTab = 'notes'; render(); window.scrollTo(0, 0); });
+
+/* ---------- start ---------- */
+function adopt(data) { const d = JSON.parse(JSON.stringify(data)); S = Object.assign(blank(), d); }
+async function connect() {
+  const c = window.claude;
+  if (!c || !c.use) { standalone = true; setStatus('Saved in this browser only'); render(); return; }
+  try { sample = await c.use('sample'); } catch (e) { sample = null; }
+  try { downloads = await c.use('downloads'); } catch (e) { downloads = null; }
+  try { db = await c.use('db'); } catch (e) { db = null; }
+  if (!db) { setStatus('Saved in this browser only'); render(); return; }
+  ref = db.doc('progress/state');
+  const timer = setTimeout(() => setStatus('Your saved progress cannot be reached yet'), 10000);
+  unsub = ref.onSnapshot(snap => {
+    clearTimeout(timer);
+    if (!snap.metadata.fromCache) setStatus('Saved to your account');
+    if (snap.metadata.hasPendingWrites || dirty || saving) return;
+    if (snap.exists) {
+      const incoming = JSON.stringify(snap.data());
+      if (incoming !== lastSaved && incoming !== JSON.stringify(S)) { adopt(snap.data()); lastSaved = incoming; render(); }
+    } else if (Object.keys(S.weeks).length || Object.keys(S.mods).length) { dirty = true; flush(); }
+  }, err => { clearTimeout(timer); setStatus(err && err.code === 'revoked' ? 'Progress is read-only now' : 'Saved in this browser only'); ref = null; });
+  render();
+}
+async function start() {
+  try { const r = await fetch('plan.json'); PLAN = await r.json(); }
+  catch (e) { app.innerHTML = '<p>The plan could not be loaded. Reload the page.</p>'; return; }
+  try { const local = localStorage.getItem('psq-progress'); if (local) adopt(JSON.parse(local)); } catch (e) {}
+  render();
+  if (window.claude && window.claude.use) connect(); else setTimeout(connect, 1200);
+}
+start();
+}
+</script>
+</body>
+</html>
